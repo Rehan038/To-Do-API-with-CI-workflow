@@ -33,7 +33,7 @@ function create(title) {
   const todo = {
     id: nextId++,
     title: title.trim(),
-    completed: true,
+    completed: false,
     createdAt: new Date().toISOString(),
   };
   todos.push(todo);
