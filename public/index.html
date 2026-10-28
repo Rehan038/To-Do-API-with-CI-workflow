@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>To-Do</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="page">
+    <header class="head">
+      <h1 class="day" id="day">Today</h1>
+      <p class="meta">
+        <span id="date"></span>
+        <span class="meta-progress" id="progress-text" aria-live="polite"></span>
+      </p>
+      <div class="bar" role="progressbar" aria-label="Tasks completed" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="bar">
+        <span class="bar-fill" id="bar-fill"></span>
+      </div>
+    </header>
+
+    <form class="composer" id="composer" autocomplete="off">
+      <label for="new-title" class="sr-only">New task</label>
+      <input id="new-title" name="title" type="text" maxlength="200" placeholder="What needs doing?">
+      <button type="submit" class="btn-primary">Add task</button>
+    </form>
+    <p class="form-error" id="form-error" role="alert"></p>
+
+    <nav class="toolbar" aria-label="Filter tasks">
+      <div class="tabs" role="tablist">
+        <a href="#/" class="tab" data-filter="all" role="tab">All <span class="count" id="count-all">0</span></a>
+        <a href="#/active" class="tab" data-filter="active" role="tab">To do <span class="count" id="count-active">0</span></a>
+        <a href="#/completed" class="tab" data-filter="completed" role="tab">Done <span class="count" id="count-completed">0</span></a>
+      </div>
+      <button type="button" class="btn-quiet" id="clear-done">Clear done</button>
+    </nav>
+
+    <section class="list-wrap" aria-label="Tasks">
+      <ul class="list" id="list"></ul>
+      <div class="empty" id="empty" hidden>
+        <p class="empty-title" id="empty-title"></p>
+        <p class="empty-text" id="empty-text"></p>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <p>Press <kbd>/</kbd> to add a task. Double-click a task to rename it.</p>
+    </footer>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <template id="item-template">
+    <li class="item">
+      <label class="check">
+        <input type="checkbox" class="check-input">
+        <span class="check-box" aria-hidden="true">
+          <svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-7" /></svg>
+        </span>
+        <span class="sr-only check-label"></span>
+      </label>
+      <span class="title"></span>
+      <input class="edit-input" type="text" maxlength="200" hidden>
+      <div class="actions">
+        <button type="button" class="icon-btn edit-btn" aria-label="Rename task">
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M13.6 3.6l2.8 2.8M4 16l.7-3.4 9-9 2.7 2.7-9 9L4 16z" /></svg>
+        </button>
+        <button type="button" class="icon-btn delete-btn" aria-label="Delete task">
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 6h10M8 6V4.5h4V6M6.5 6l.6 9.5h5.8l.6-9.5" /></svg>
+        </button>
+      </div>
+    </li>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>
